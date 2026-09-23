@@ -1,6 +1,6 @@
 # home_arch
 
-Meus dotfiles do Arch Linux com **Hyprland**, **Waybar** e **Kitty**.
+Meus dotfiles do Arch Linux com **Hyprland**, **Waybar**, **Kitty** e **Rofi**.
 
 ## Estrutura do repositório e destino em `~/.config`
 
@@ -9,6 +9,7 @@ Meus dotfiles do Arch Linux com **Hyprland**, **Waybar** e **Kitty**.
 | `hyperland/hyprland.conf` | `~/.config/hypr/hyprland.conf` | Config principal do Hyprland |
 | `hyperland/hyprland.lua` | `~/.config/hypr/hyprland.lua` | Mesma config convertida para Lua (via `hyprconf2lua`). Use **apenas uma** das duas |
 | `kitty_console/kitty.conf` | `~/.config/kitty/kitty.conf` | Terminal Kitty |
+| `rofi/config.rasi` | `~/.config/rofi/config.rasi` | Lançador de apps Rofi (config + tema) |
 | `waybar/config.jsonc` | `~/.config/waybar/config.jsonc` | Config da barra (em uso) |
 | `waybar/style.css` | `~/.config/waybar/style.css` | Tema da barra (em uso) |
 | `waybar/scripts/waybar-wttr.py` | `~/.config/waybar/scripts/waybar-wttr.py` | Script do módulo de clima (precisa ser executável) |
@@ -26,6 +27,8 @@ Meus dotfiles do Arch Linux com **Hyprland**, **Waybar** e **Kitty**.
 │   └── hyprland.conf
 ├── kitty/
 │   └── kitty.conf
+├── rofi/
+│   └── config.rasi
 └── waybar/
     ├── config.jsonc
     ├── style.css
@@ -42,10 +45,11 @@ Meus dotfiles do Arch Linux com **Hyprland**, **Waybar** e **Kitty**.
 git clone <url-do-repo> ~/home_arch
 cd ~/home_arch
 
-mkdir -p ~/.config/hypr ~/.config/kitty ~/.config/waybar/scripts
+mkdir -p ~/.config/hypr ~/.config/kitty ~/.config/rofi ~/.config/waybar/scripts
 
 cp hyperland/hyprland.conf          ~/.config/hypr/hyprland.conf
 cp kitty_console/kitty.conf         ~/.config/kitty/kitty.conf
+cp rofi/config.rasi                 ~/.config/rofi/config.rasi
 cp waybar/config.jsonc              ~/.config/waybar/config.jsonc
 cp waybar/style.css                 ~/.config/waybar/style.css
 cp waybar/scripts/waybar-wttr.py    ~/.config/waybar/scripts/
@@ -61,10 +65,11 @@ Assim, alterações no repositório refletem direto no sistema (faça backup das
 ```bash
 cd ~/home_arch
 
-mkdir -p ~/.config/hypr ~/.config/kitty ~/.config/waybar
+mkdir -p ~/.config/hypr ~/.config/kitty ~/.config/rofi ~/.config/waybar
 
 ln -sf "$PWD/hyperland/hyprland.conf"  ~/.config/hypr/hyprland.conf
 ln -sf "$PWD/kitty_console/kitty.conf" ~/.config/kitty/kitty.conf
+ln -sf "$PWD/rofi/config.rasi"        ~/.config/rofi/config.rasi
 ln -sf "$PWD/waybar/config.jsonc"      ~/.config/waybar/config.jsonc
 ln -sf "$PWD/waybar/style.css"         ~/.config/waybar/style.css
 ln -sfn "$PWD/waybar/scripts"          ~/.config/waybar/scripts
@@ -79,7 +84,7 @@ hyprctl reload              # recarrega o Hyprland
 killall -SIGUSR2 waybar     # recarrega o Waybar (ou reinicie a sessão)
 ```
 
-O Kitty relê a config ao abrir uma nova janela (ou `Ctrl+Shift+F5`).
+O Kitty relê a config ao abrir uma nova janela (ou `Ctrl+Shift+F5`). O Rofi lê a config a cada execução, então não precisa recarregar.
 
 ## Detalhes de cada config
 
@@ -118,6 +123,16 @@ Principais atalhos (`SUPER` = tecla Windows):
 
 Tema neon escuro (roxo/ciano/verde), fonte **JetBrainsMono Nerd Font Mono** 13pt com ligaduras, fundo com 82% de opacidade e blur, cursor beam e barra de abas powerline na parte inferior.
 
+### Rofi (`~/.config/rofi/config.rasi`)
+
+Lançador de apps no modo `drun` (com ícones), aberto por `SUPER + R` ou pelo clique no logo do Arch no Waybar.
+
+- Janela de 450px, fundo escuro `#0d0e1a`, borda branca de 2px e cantos arredondados (8px).
+- Lista de 1 coluna com 7 linhas, sem scrollbar; o item selecionado fica com fundo branco e texto preto.
+- Fonte **Figtree** 13pt e placeholder "Search Apps".
+
+Para testar sem o atalho: `rofi -show drun`.
+
 ### Waybar (`~/.config/waybar/`)
 
 Layout da barra:
@@ -140,3 +155,4 @@ sudo pacman -S hyprland hyprpaper hyprsunset waybar kitty rofi nautilus \
 - `pacman-contrib` fornece o `checkupdates` usado pelo módulo de updates.
 - `python-requests` é necessário para o script de clima.
 - `wlogout` está disponível no AUR (`yay -S wlogout`).
+- A fonte **Figtree** usada pelo Rofi está no AUR (`yay -S ttf-figtree`); sem ela o Rofi usa a fonte padrão do sistema.
