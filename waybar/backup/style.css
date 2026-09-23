@@ -1,0 +1,443 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono";
+    font-weight: bold;
+    font-size: 13px; /* Tamanho da fonte reduzido */
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+/* --- ESTILO DOS NÚMEROS DO WORKSPACE --- */
+#workspaces button {
+    padding: 2px 10px;
+    color: #636777;
+    background-color: transparent;
+    margin: 4px 4px 4px 0px;
+    border-radius: 6px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+    background-color: #11111b;
+    color: #89b4fa;
+    border-bottom: 3px solid #89b4fa;
+    border-radius: 6px;
+}
+
+#workspaces button:hover {
+    background-color: #313244;
+    color: #cdd6f4;
+    border-bottom: 3px solid transparent; 
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background-color: #f38ba8;
+    border-radius: 6px;
+}
+
+#workspaces button.focused {
+    color: #a6adc8;
+    background: #eba0ac;
+    border-radius: 10px;
+}
+
+/* --- Módulos Gerais --- */
+#custom-power_profile,
+#custom-weather,
+#custom-moon,
+#custom-wallpaper,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#temperature,
+#memory,
+#cpu,
+#workspaces,
+#tray,
+#backlight {
+    background: #1e1e2e;
+    opacity: 0.8;
+    padding: 0px 10px; /* Mantém 0 de espaço vertical interno */
+    margin: 4px 0px;   /* Reduzido: Dá apenas 4px de margem em cima e embaixo para emagrecer a barra */
+    border: 1px solid #181825;
+}
+
+/* --- Módulos Arredondados e Separados (Pílulas) --- */
+
+#network {
+    color: #f9e2af;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#cpu {
+    color: #a6e3a1;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+#memory {
+    color: #eba0ac;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+}
+
+#clock {
+    color: #fab387;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+/* --- Fim das Pílulas --- */
+
+#temperature {
+    border-radius: 10px 0px 0px 10px;
+}
+
+#temperature.critical {
+    color: #f00;
+}
+
+#backlight {
+    border-radius: 0px;
+    border-left: 0px;
+}
+
+#tray {
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#workspaces {
+    background: #1e1e2e;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#custom-power_profile {
+    color: #a6e3a1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#window {
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#bluetooth {
+    color: #89b4fa;
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px
+} 
+
+#pulseaudio {
+    color: #89b4fa;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px;
+}
+
+#battery {
+    color: #a6e3a1;
+    border-radius: 0 10px 10px 0;
+    margin-right: 10px;
+    border-left: 0px;
+}
+#battery.warning {
+    color: #FFA500;
+}
+#battery.critical {
+    color: #F00;
+} 
+#custom-moon {
+    border-radius: 0px 10px 10px 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono";
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 0;
+}
+
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+/* --- ESTILO DOS NÚMEROS DO WORKSPACE --- */
+#workspaces button {
+    padding: 2px 10px; /* Dá corpo ao botão (vertical e horizontal) */
+    color: #636777; /* Cor do número apagado */
+    background-color: transparent;
+    margin: 4px 4px 4px 0px; /* Separa os botões uns dos outros */
+    border-radius: 6px; /* Arredonda levemente os cantos do botão */
+    border-bottom: 3px solid transparent; /* Linha inferior invisível para não pular a tela */
+    transition: all 0.3s ease; /* Animação suave ao trocar */
+}
+
+/* WORKSPACE ATUAL (O efeito da sua imagem usando suas cores!) */
+#workspaces button.active {
+    background-color: #11111b; /* Fundo mais escuro que a barra para dar profundidade */
+    color: #89b4fa; /* Azul vibrante do seu tema */
+    border-bottom: 3px solid #89b4fa; /* A linha de destaque na base */
+    border-radius: 6px;
+}
+
+/* WORKSPACE COM MOUSE EM CIMA */
+#workspaces button:hover {
+    background-color: #313244; /* Cinza médio */
+    color: #cdd6f4; /* Fica branco */
+    border-bottom: 3px solid transparent; 
+}
+
+/* WORKSPACE COM ALERTA (Ex: Aplicativo pedindo atenção) */
+#workspaces button.urgent {
+    color: #11111b;
+    background-color: #f38ba8; /* Vermelho suave do Catppuccin */
+    border-radius: 6px;
+}
+
+#workspaces button.active {
+    background-color: #000;
+}
+
+#workspaces button.focused {
+    color: #a6adc8;
+    background: #eba0ac;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 10px;
+}
+
+/* Adicionado o #cpu e renomeado os módulos de memória e temperatura aqui */
+#custom-power_profile,
+#custom-weather,
+#custom-moon,
+#custom-wallpaper,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#temperature,
+#memory,
+#cpu,
+#workspaces,
+#tray,
+#backlight {
+    background: #1e1e2e;
+    opacity: 0.8;
+    padding: 0px 10px;
+    /* margin: 3px 0px; */
+    margin: 0px 0px;
+    margin-top: 10px;
+    border: 1px solid #181825;
+}
+
+/* Renomeado de #custom-memory para #memory */
+#memory {
+    color: #eba0ac;
+    margin-right: 10px;
+}
+
+/* Adicionado cor para o CPU para combinar com o seu tema */
+#cpu {
+    color: #a6e3a1;
+    margin-right: 10px;
+}
+
+/* Renomeado de #custom-temperature para #temperature */
+#temperature {
+    border-radius: 10px 0px 0px 10px;
+}
+
+/* Renomeado para a tag crítica nativa */
+#temperature.critical {
+    color: #f00;
+}
+
+#backlight {
+    border-radius: 10px 0px 0px 10px;
+}
+
+#tray {
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#workspaces {
+    background: #1e1e2e;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#custom-power_profile {
+    color: #a6e3a1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#window {
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#clock {
+    color: #fab387;
+    border-radius: 10px 10px 10px 10px;
+    border-right: 0px;
+}
+
+#bluetooth {
+    color: #89b4fa;
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px
+} 
+
+#pulseaudio {
+    color: #89b4fa;
+    border-left: 0px;
+    border-right: 0px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 10px 10px 10px 10px;
+    margin-right: 10px;
+}
+
+#network {
+    color: #f9e2af;
+    border-radius: 10px;
+    margin-left: 10px;  /* Cria o espaço entre o relógio e a rede */
+    margin-right: 10px; /* Cria um espaço entre a rede e o canto da tela */
+}
+
+#battery {
+    color: #a6e3a1;
+    border-radius: 0 10px 10px 0; 
+    margin-right: 10px;
+    border-left: 0px;
+}
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono";
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: #636777;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    background-color: #000;
+}
+
+#workspaces button.focused {
+    color: #a6adc8;
+    background: #eba0ac;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: #11111b;
+    color: #11111b;
+    border-radius: 5px;
+}
+
+
+#battery.warning {
+    color: #FFA500;
+}
+#battery.critical {
+    color: #F00;
+} 
+#custom-moon {
+    border-radius: 0px 10px 10px 0px;
+    border-right: 0px;
+    margin-left: 0px;
+}
+
+

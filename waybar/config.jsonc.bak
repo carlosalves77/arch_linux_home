@@ -1,0 +1,162 @@
+{
+    // =========================================================
+    // Waybar config — tema teal/dark
+    // Layout: [Arch, hora, updates, media] | [workspaces] | [clima, mic, volume, notif]
+    // =========================================================
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 4,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+
+    // Ordem dos módulos da esquerda para a direita
+    "modules-left": [
+        "custom/arch",
+        "clock",
+        "custom/updates",
+        "mpris"
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+        "custom/weather",
+        "pulseaudio#microphone",
+        "pulseaudio",
+        "custom/notification"
+    ],
+
+    // =========================================================
+    // ESQUERDA
+    // =========================================================
+
+    // Símbolo do Arch Linux — abre um menu ou lança rofi
+    "custom/arch": {
+        "format": "󰣇",
+        "tooltip-format": "Arch Linux",
+        "on-click": "rofi -show drun",
+        "on-click-right": "wlogout"
+    },
+
+    // Relógio
+    "clock": {
+        "format": " {:%I:%M %p}",
+        "format-alt": " {:%a %d %b}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "today": "<span color='#7dcfff'><b>{}</b></span>"
+            }
+        }
+    },
+
+    // Número de updates pendentes (checkupdates do pacman)
+    "custom/updates": {
+        "format": "󰅢 {}",
+        "interval": 3600,
+        "exec": "checkupdates 2>/dev/null | wc -l",
+        "exec-if": "exit 0",
+        "on-click": "kitty -e sh -c 'sudo pacman -Syu; read -p \"Pressione Enter...\"'",
+        "signal": 8,
+        "tooltip-format": "{} pacotes para atualizar"
+    },
+
+    // Música/media tocando (via playerctl/mpris)
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "",
+            "firefox": "󰈹",
+            "mpv": ""
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "dynamic-len": 30,
+        "dynamic-order": ["title", "artist"],
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "max-length": 40
+    },
+
+    // =========================================================
+    // CENTRO — workspaces numerados 1-5
+    // =========================================================
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    // =========================================================
+    // DIREITA
+    // =========================================================
+
+    // Clima (usa seu script wttr.py)
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "~/.config/waybar/scripts/waybar-wttr.py",
+        "return-type": "json"
+    },
+
+    // Volume do MICROFONE
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "tooltip-format": "Microfone: {volume}%"
+    },
+
+    // Volume de SAÍDA (fones/alto-falante)
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "tooltip-format": "{desc}: {volume}%"
+    },
+
+    // Notificações (usa swaync)
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}
